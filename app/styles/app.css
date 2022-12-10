@@ -513,16 +513,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.top-2 {
-  top: 0.5rem;
-}
-
-.space-y-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-}
-
 .bg-slate-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
@@ -549,24 +539,7 @@ video {
   text-transform: uppercase;
 }
 
-.underline {
-  text-decoration-line: underline;
-}
-
-.hover\:bg-slate-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
-}
-
 .hover\:text-slate-600:hover {
   --tw-text-opacity: 1;
   color: rgb(71 85 105 / var(--tw-text-opacity));
-}
-
-.hover\:text-opacity-10:hover {
-  --tw-text-opacity: 0.1;
-}
-
-.hover\:text-opacity-80:hover {
-  --tw-text-opacity: 0.8;
 }
