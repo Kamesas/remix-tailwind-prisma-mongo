@@ -32,6 +32,7 @@ export async function register(user: RegisterForm) {
   }
 
   const newUser = await createUser(user);
+
   if (!newUser) {
     return json(
       {
