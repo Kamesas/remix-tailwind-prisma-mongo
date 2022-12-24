@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Home() {
   const { users, kudos } = useLoaderData();
-  console.log("kudos", kudos);
+  console.log("kudos ====>", kudos);
   return (
     <Layout>
       <Outlet />
