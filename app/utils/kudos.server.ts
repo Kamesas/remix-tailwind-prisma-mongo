@@ -32,7 +32,9 @@ export const getFilteredKudos = async (
   sortFilter: Prisma.KudoOrderByWithRelationInput,
   whereFilter: Prisma.KudoWhereInput
 ) => {
-  // if (!prisma.kudo) return;
+  console.log("prisma", prisma);
+
+  if (!prisma.kudo) return;
 
   return await prisma.kudo.findMany({
     select: {
