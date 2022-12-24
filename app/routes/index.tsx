@@ -10,6 +10,8 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Home() {
   const { user } = useLoaderData();
+  console.log("user", user);
+
   return (
     <div>
       <div className="nav">
