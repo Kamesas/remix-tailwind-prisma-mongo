@@ -36,9 +36,14 @@ export default function Home() {
           {/* Search Bar Goes Here */}
           <div className="flex-1 flex">
             <div className="w-full p-10 flex flex-col gap-y-4">
-              {kudos?.map((kudo: KudoWithProfile) => (
-                <Kudo key={kudo.id} kudo={kudo} profile={kudo.author.profile} />
-              ))}
+              {!!kudos?.length &&
+                kudos?.map((kudo: KudoWithProfile) => (
+                  <Kudo
+                    key={kudo.id}
+                    kudo={kudo}
+                    profile={kudo.author.profile}
+                  />
+                ))}
             </div>
             {/* Recent Kudos Goes Here */}
           </div>
