@@ -9,10 +9,8 @@ export const createKudo = async (
 ) => {
   await prisma.kudo.create({
     data: {
-      // 1
       message,
       style,
-      // 2
       author: {
         connect: {
           id: userId,
@@ -51,6 +49,28 @@ export const getFilteredKudos = async (
     where: {
       recipientId: userId,
       ...whereFilter,
+    },
+  });
+};
+
+export const getRecentKudos = async () => {
+  return await prisma.kudo.findMany({
+    take: 3,
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      style: {
+        select: {
+          emoji: true,
+        },
+      },
+      recipient: {
+        select: {
+          id: true,
+          profile: true,
+        },
+      },
     },
   });
 };
