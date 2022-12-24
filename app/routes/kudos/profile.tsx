@@ -54,7 +54,7 @@ export const action: ActionFunction = async ({ request }) => {
   });
 
   // 4
-  return redirect("/home");
+  return redirect("/kudos");
 };
 
 export default function ProfileSettings() {

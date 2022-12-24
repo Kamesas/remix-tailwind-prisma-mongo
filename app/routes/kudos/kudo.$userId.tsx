@@ -47,7 +47,7 @@ export const action: ActionFunction = async ({ request }) => {
     emoji: emoji as Emoji,
   });
 
-  return redirect("/home");
+  return redirect("/kudos");
 };
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -55,7 +55,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const user = await getUser(request);
 
   if (typeof userId !== "string") {
-    return redirect("/home");
+    return redirect("/kudos");
   }
 
   const recipient = await getUserById(userId);

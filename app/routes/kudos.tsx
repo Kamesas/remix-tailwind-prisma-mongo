@@ -70,7 +70,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json({ users, kudos, recentKudos, user });
 };
 
-export default function Home() {
+export default function Kudos() {
   const { users, kudos, recentKudos, user } = useLoaderData();
   return (
     <Layout>

@@ -15,7 +15,7 @@ export function SearchBar({ profile }: props) {
   const clearFilters = () => {
     searchParams.delete("filter");
     searchParams.delete("sort");
-    navigate("/home");
+    navigate("/kudos");
   };
 
   return (
