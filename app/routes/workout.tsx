@@ -1,24 +1,41 @@
 import type { ActionFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { NavLink, Outlet } from "@remix-run/react";
 import { createExerciseAction } from "~/actions/workout";
 import { requireUserId } from "~/utils/auth.server";
-import { deleteExercise } from "~/utils/training.server";
+import { createExercise, deleteExercise } from "~/utils/training.server";
 
-// export const action: ActionFunction = async ({ request }) => {
-//   const userId = await requireUserId(request);
+export const action: ActionFunction = async ({ request }) => {
+  const userId = await requireUserId(request);
 
-//   const form = await request.formData();
-//   const id = form.get("id") as string;
-//   const actionsName = form.get("_action") as keyof typeof actions;
+  const form = await request.formData();
+  const id = form.get("id") as string;
+  const actionsName = form.get("_action") as keyof typeof actions;
 
-//   const actions = {
-//     create: createExerciseAction({ form, userId }),
-//     delete: deleteExercise({ exerciseId: id }),
-//   };
+  const actions = {
+    create: createExerciseAction({ form, userId }),
+    delete: deleteExercise({ exerciseId: id }),
+  };
 
-//   await actions[actionsName];
-//   return null;
-// };
+  if (actionsName === "create") {
+    const value = form.get("value") as string;
+    const name = form.get("exerciseName") as string;
+
+    if (typeof value !== "string") {
+      return json({ error: `Invalid Form Data` }, { status: 400 });
+    }
+
+    if (!value.length) {
+      return json({ error: `Please provide a value.` }, { status: 400 });
+    }
+
+    await createExercise({ name, userId, value: value });
+    return null;
+  }
+
+  await actions[actionsName];
+  return null;
+};
 
 const Workout = () => {
   return (
