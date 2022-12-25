@@ -35,8 +35,7 @@ export const createExercise = async ({
   userId: string;
   value: string;
 }) => {
-  console.log("userid", userId);
-  await prisma.exercises.create({
+  return await prisma.exercises.create({
     data: {
       name,
       value,
@@ -54,7 +53,7 @@ export const deleteExercise = async ({
 }: {
   exerciseId: string;
 }) => {
-  await prisma.exercises.delete({
+  return await prisma.exercises.delete({
     where: {
       id: exerciseId,
     },

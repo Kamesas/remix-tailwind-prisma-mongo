@@ -1,9 +1,8 @@
 import type { ActionFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { NavLink, Outlet } from "@remix-run/react";
 import { createExerciseAction } from "~/actions/workout";
 import { requireUserId } from "~/utils/auth.server";
-import { createExercise, deleteExercise } from "~/utils/training.server";
+import { deleteExercise } from "~/utils/training.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const userId = await requireUserId(request);
@@ -17,24 +16,8 @@ export const action: ActionFunction = async ({ request }) => {
     delete: deleteExercise({ exerciseId: id }),
   };
 
-  if (actionsName === "create") {
-    const value = form.get("value") as string;
-    const name = form.get("exerciseName") as string;
-
-    if (typeof value !== "string") {
-      return json({ error: `Invalid Form Data` }, { status: 400 });
-    }
-
-    if (!value.length) {
-      return json({ error: `Please provide a value.` }, { status: 400 });
-    }
-
-    await createExercise({ name, userId, value: value });
-    return null;
-  }
-
-  await actions[actionsName];
-  return null;
+  return await actions[actionsName];
+  // return null;
 };
 
 const Workout = () => {

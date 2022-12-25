@@ -19,5 +19,5 @@ export const createExerciseAction = async ({
     return json({ error: `Please provide a value.` }, { status: 400 });
   }
 
-  await createExercise({ name, userId, value: value });
+  return await createExercise({ name, userId, value: value });
 };
