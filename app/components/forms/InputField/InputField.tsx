@@ -9,6 +9,7 @@ interface FormFieldProps {
   value: any;
   onChange?: (...args: any) => any;
   error?: string;
+  className?: string;
 }
 
 export function InputField({
@@ -18,6 +19,7 @@ export function InputField({
   value,
   onChange = () => {},
   error = "",
+  className,
 }: FormFieldProps) {
   const [errorText, setErrorText] = useState(error);
 
@@ -38,7 +40,7 @@ export function InputField({
         type={type}
         id={htmlFor}
         name={htmlFor}
-        className="w-full p-2 rounded-xl my-2"
+        className={`w-full p-2 rounded-xl my-2 ${className}`}
         value={value}
       />
       <div className="text-xs font-semibold text-center tracking-wide text-red-500 w-full">

@@ -1,12 +1,23 @@
 import { prisma } from "./prisma.server";
 
-export const getExercisesById = async (userId: string) => {
+export const getExercisesByUserId = async (userId: string) => {
   return await prisma.exercises.findMany({
     where: {
       userId,
-      name: {
-        equals: "push ups",
-      },
+    },
+  });
+};
+
+export const getExercisesByUserIdAdnDate = async (
+  userId: string,
+  date: string
+) => {
+  return await prisma.exercises.findMany({
+    where: {
+      userId,
+      // name: {
+      //   equals: "push ups",
+      // },
       createdAt: {
         gte: new Date("2022-12-25"),
         lt: new Date("2022-12-26"),
