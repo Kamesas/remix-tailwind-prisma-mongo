@@ -41,7 +41,7 @@ export const createExercise = async ({
       value,
       user: {
         connect: {
-          id: userId || undefined,
+          id: userId,
         },
       },
     },
@@ -53,6 +53,7 @@ export const deleteExercise = async ({
 }: {
   exerciseId: string;
 }) => {
+  if (!exerciseId) return null;
   return await prisma.exercises.delete({
     where: {
       id: exerciseId,

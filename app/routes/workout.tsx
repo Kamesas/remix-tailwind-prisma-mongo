@@ -17,7 +17,6 @@ export const action: ActionFunction = async ({ request }) => {
   };
 
   return await actions[actionsName];
-  // return null;
 };
 
 const Workout = () => {
