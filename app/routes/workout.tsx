@@ -8,12 +8,12 @@ export const action: ActionFunction = async ({ request }) => {
   const userId = await requireUserId(request);
 
   const form = await request.formData();
-  const id = form.get("id") as string;
+  // const id = form.get("id") as string;
   const actionsName = form.get("_action") as keyof typeof actions;
 
   const actions = {
     create: createExerciseAction({ form, userId }),
-    delete: deleteExercise({ exerciseId: id }),
+    // delete: deleteExercise({ exerciseId: id }),
   };
 
   return await actions[actionsName];
