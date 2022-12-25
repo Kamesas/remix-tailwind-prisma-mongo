@@ -29,7 +29,8 @@ export const TrainingForm = () => {
   };
 
   return (
-    <Form method="post" action="/workout">
+    // <Form method="post" action="/workout">
+    <Form method="post">
       <InputField
         htmlFor="value"
         label="Repetition"

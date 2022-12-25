@@ -4,21 +4,21 @@ import { createExerciseAction } from "~/actions/workout";
 import { requireUserId } from "~/utils/auth.server";
 import { deleteExercise } from "~/utils/training.server";
 
-export const action: ActionFunction = async ({ request }) => {
-  const userId = await requireUserId(request);
+// export const action: ActionFunction = async ({ request }) => {
+//   const userId = await requireUserId(request);
 
-  const form = await request.formData();
-  const id = form.get("id") as string;
-  const actionsName = form.get("_action") as keyof typeof actions;
+//   const form = await request.formData();
+//   const id = form.get("id") as string;
+//   const actionsName = form.get("_action") as keyof typeof actions;
 
-  const actions = {
-    create: createExerciseAction({ form, userId }),
-    delete: deleteExercise({ exerciseId: id }),
-  };
+//   const actions = {
+//     create: createExerciseAction({ form, userId }),
+//     delete: deleteExercise({ exerciseId: id }),
+//   };
 
-  await actions[actionsName];
-  return null;
-};
+//   await actions[actionsName];
+//   return null;
+// };
 
 const Workout = () => {
   return (

@@ -13,7 +13,8 @@ export const ExerciseList: FC<tExerciseListProps> = () => {
         return (
           <li key={item?.id}>
             <span className="">{item?.value}</span>
-            <Form method="post" action="/workout">
+            {/* <Form method="post" action="/workout"> */}
+            <Form method="post">
               <input type={"hidden"} value={item?.id} name="id" />
               <button
                 aria-label="delete"
