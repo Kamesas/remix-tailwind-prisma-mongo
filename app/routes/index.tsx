@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="nav">
+      <div>
         <NavLink to={"/kudos"}>Kudos</NavLink>
         <NavLink to={"/workout"}>Workout</NavLink>
       </div>

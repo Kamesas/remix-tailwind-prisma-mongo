@@ -1,7 +1,7 @@
 const Chart = () => {
   return (
     <div className="Chart">
-      <div className="sidebar">Chart</div>
+      <h1 className="uppercase text-xl text-emerald-800">Cart</h1>
     </div>
   );
 };

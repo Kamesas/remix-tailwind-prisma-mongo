@@ -8,7 +8,7 @@ export const getExercisesByUserId = async (userId: string) => {
   });
 };
 
-export const getExercisesByUserIdAdnDate = async (
+export const getExercisesByUserIdAndDate = async (
   userId: string,
   date: string
 ) => {
