@@ -3,7 +3,7 @@ import { prisma } from "./prisma.server";
 export const getExercisesByUserId = async (userId: string) => {
   return await prisma.exercises.findMany({
     where: {
-      userId,
+      id: userId,
     },
   });
 };
