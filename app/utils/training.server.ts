@@ -35,13 +35,14 @@ export const createExercise = async ({
   userId: string;
   value: string;
 }) => {
+  console.log("userid", userId);
   await prisma.exercises.create({
     data: {
       name,
       value,
       user: {
         connect: {
-          id: userId,
+          id: userId || undefined,
         },
       },
     },
