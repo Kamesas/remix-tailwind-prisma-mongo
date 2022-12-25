@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import type { FC } from "react";
 
 type tExerciseListProps = {
@@ -10,7 +10,22 @@ export const ExerciseList: FC<tExerciseListProps> = () => {
   return (
     <ul className="flex gap-2">
       {exercises?.map((item: any) => {
-        return <li key={item?.id}>{item?.value}</li>;
+        return (
+          <li key={item?.id}>
+            <span className="">{item?.value}</span>
+            <Form method="post">
+              <input type={"hidden"} value={item?.id} name="id" />
+              <button
+                aria-label="delete"
+                type="submit"
+                name="_action"
+                value={"delete"}
+              >
+                x
+              </button>
+            </Form>
+          </li>
+        );
       })}
     </ul>
   );

@@ -47,3 +47,15 @@ export const createExercise = async ({
     },
   });
 };
+
+export const deleteExercise = async ({
+  exerciseId,
+}: {
+  exerciseId: string;
+}) => {
+  await prisma.exercises.delete({
+    where: {
+      id: exerciseId,
+    },
+  });
+};
