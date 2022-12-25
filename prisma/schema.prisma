@@ -72,22 +72,11 @@ model Kudo {
 //   name        String
 // }
 
-type ExercicesValue {
-  createdAt   DateTime   @default(now())
-  value       String
-}
 model Exercises {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   createdAt   DateTime   @default(now())
   user        User       @relation(references: [id], fields: [userId], "UserExercises")
   userId      String     @db.ObjectId
   name        String
-  value       ExercicesValue[]
+  value       String
 }
-// model Training {
-//   id          String     @id @default(auto()) @map("_id") @db.ObjectId
-//   createdAt   DateTime   @default(now())
-//   user        User       @relation(references: [id], fields: [userId], "UserExercises")
-//   userId      String     @db.ObjectId
-//   name        String
-// }
