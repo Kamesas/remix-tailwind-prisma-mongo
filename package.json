@@ -15,7 +15,9 @@
     "@remix-run/vercel": "^1.8.2",
     "@vercel/node": "^2.6.2",
     "bcryptjs": "^2.4.3",
+    "daisyui": "^2.46.0",
     "react": "^18.2.0",
+    "@heroicons/react": "^2.0.13",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

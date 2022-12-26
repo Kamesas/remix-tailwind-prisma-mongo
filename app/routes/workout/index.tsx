@@ -17,12 +17,12 @@ export default function Training() {
   const { training } = useLoaderData();
 
   return (
-    <div className="Training">
+    <>
       <h1 className="uppercase text-xl text-emerald-800">Training</h1>
 
       <ExerciseList />
       {!training?.id && <CreateTraining />}
       {training?.id && <TrainingForm />}
-    </div>
+    </>
   );
 }
