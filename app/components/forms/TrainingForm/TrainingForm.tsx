@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import { SelectBox } from "~/components/select-box";
 import { InputField } from "../InputField/InputField";
 import { exerciseArr } from "~/CONSTANTS/workout";
+import type { Rep, Training } from "@prisma/client";
 
 export const TrainingForm = () => {
   const actionData = useActionData();
-  const { exercises } = useLoaderData();
+  // const { exercises } = useLoaderData();
+  const training = useLoaderData()?.training as Training & { set: Rep[] };
   const [formError] = useState(actionData?.error || "");
   const [formData, setFormData] = useState({
     value: "",
     exerciseName: "",
   });
+
   useEffect(() => {
     setFormData((prev) => {
       return {
@@ -19,7 +22,7 @@ export const TrainingForm = () => {
         value: "",
       };
     });
-  }, [exercises?.length]);
+  }, [training?.set?.length]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -28,8 +31,11 @@ export const TrainingForm = () => {
     setFormData((data) => ({ ...data, [field]: e.target.value }));
   };
 
+  if (!training?.id) return null;
   return (
     <Form method="post" action="/workout">
+      <input type={"hidden"} value={training?.id} name="id" />
+
       <InputField
         htmlFor="value"
         label="Repetition"
@@ -49,9 +55,9 @@ export const TrainingForm = () => {
       />
       <button
         type="submit"
-        aria-label="create exercise"
+        aria-label="create rep"
         name="_action"
-        value={"create"}
+        value={"createRep"}
         className="rounded-xl bg-yellow-300 font-semibold text-blue-600 w-80 h-12 transition duration-300 ease-in-out hover:bg-yellow-400 hover:-translate-y-1"
       >
         Send

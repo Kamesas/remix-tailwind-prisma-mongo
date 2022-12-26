@@ -1,11 +1,11 @@
 import { json } from "@remix-run/node";
-import { createExercise } from "~/utils/training.server";
+import { createTrainingRep } from "~/utils/training.server";
 
-export const createExerciseAction = async ({
-  userId,
+export const createRepAction = async ({
+  trainingId,
   form,
 }: {
-  userId: string;
+  trainingId: string;
   form: FormData;
 }) => {
   const value = form.get("value") as string;
@@ -19,5 +19,5 @@ export const createExerciseAction = async ({
     return json({ error: `Please provide a value.` }, { status: 400 });
   }
 
-  return await createExercise({ name, userId, value: value });
+  return await createTrainingRep({ name, trainingId, value: value });
 };

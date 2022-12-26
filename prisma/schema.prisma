@@ -19,7 +19,6 @@ model User {
   profile Profile 
   authoredKudos Kudo[]  @relation("AuthoredKudos")
   kudos         Kudo[]  @relation("RecievedKudos")
-  exercises     Exercises[]  @relation("UserExercises")
   training      Training[]  @relation("UserTraining")
 }
 
@@ -78,7 +77,7 @@ model Training {
   createdAt   DateTime   @default(now())
   user        User       @relation(references: [id], fields: [userId], "UserTraining")
   userId      String     @db.ObjectId
-  training    Rep[]      @relation("TrainingRep") //rename to set
+  set         Rep[]      @relation("TrainingRep") //rename to set
   massage     String?
 }
 
@@ -86,14 +85,6 @@ model Rep {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   training    Training   @relation(references: [id], fields: [trainingId], "TrainingRep")
   trainingId  String     @db.ObjectId
-  name        String
-  value       String
-}
-model Exercises {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt   DateTime   @default(now())
-  user        User       @relation(references: [id], fields: [userId], "UserExercises")
-  userId      String     @db.ObjectId
   name        String
   value       String
 }

@@ -1,3 +1,4 @@
+import type { Rep, Training } from "@prisma/client";
 import { Form, useLoaderData } from "@remix-run/react";
 import type { FC } from "react";
 
@@ -6,23 +7,24 @@ type tExerciseListProps = {
 };
 
 export const ExerciseList: FC<tExerciseListProps> = () => {
-  const { exercises } = useLoaderData();
+  const training = useLoaderData()?.training as Training & { set: Rep[] };
 
-  // console.log("exercises", exercises);
-
+  if (!training?.set?.length) return <h2>no reps yet</h2>;
   return (
-    <ul className="flex gap-2">
-      {exercises?.map((item: any) => {
+    <ul className="flex gap-2 flex-wrap">
+      {training?.set?.map((item) => {
         return (
-          <li key={item?.id}>
-            <span className="">{item?.value}</span>
+          <li key={item?.id} className="flex gap-2 border-2 p-2 ">
+            <span className="">
+              {item?.name} {`-->`} {item?.value}
+            </span>
             <Form method="post" action="/workout">
               <input type={"hidden"} value={item?.id} name="id" />
               <button
                 aria-label="delete"
                 type="submit"
                 name="_action"
-                value={"delete"}
+                value={"deleteRep"}
               >
                 x
               </button>
