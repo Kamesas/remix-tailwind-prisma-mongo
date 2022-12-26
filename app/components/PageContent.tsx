@@ -22,8 +22,6 @@ function PageContent() {
         className="flex-1 overflow-y-auto pt-8 px-6  bg-base-200"
         ref={mainContentRef}
       >
-        <h1>Page content</h1>
-
         <Outlet />
         <div className="h-16"></div>
       </main>

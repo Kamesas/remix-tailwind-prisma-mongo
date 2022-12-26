@@ -15,6 +15,8 @@ export const TrainingForm = () => {
     exerciseName: "",
   });
 
+  console.log("formData", formData, actionData?.error);
+
   useEffect(() => {
     setFormData((prev) => {
       return {
@@ -25,43 +27,85 @@ export const TrainingForm = () => {
   }, [training?.set?.length]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     field: string
   ) => {
+    console.log("e", e.target?.value);
+
     setFormData((data) => ({ ...data, [field]: e.target.value }));
   };
 
   if (!training?.id) return null;
   return (
-    <Form method="post" action="/workout">
-      <input type={"hidden"} value={training?.id} name="id" />
-
-      <InputField
-        htmlFor="value"
-        label="Repetition"
-        className="border-slate-700 border-2"
-        value={formData.value}
-        onChange={(e) => handleChange(e, "value")}
-      />
-
-      <SelectBox
-        options={exerciseArr}
-        name="exerciseName"
-        value={formData.exerciseName}
-        onChange={(e) => handleChange(e, "exerciseName")}
-        label="Exercise name"
-        containerClassName="w-36"
-        className="w-full rounded-xl px-3 py-2 text-gray-400 border-slate-700 border-2"
-      />
-      <button
-        type="submit"
-        aria-label="create rep"
-        name="_action"
-        value={"createRep"}
-        className="rounded-xl bg-yellow-300 font-semibold text-blue-600 w-80 h-12 transition duration-300 ease-in-out hover:bg-yellow-400 hover:-translate-y-1"
+    <div className="flex gap-4 mt-4">
+      <Form
+        method="post"
+        action="/workout"
+        className="py-8 p-6 bg-base-100 rounded-xl flex-shrink-0 w-full max-w-2xl"
       >
-        Send
-      </button>
-    </Form>
+        <input type={"hidden"} value={training?.id} name="id" />
+
+        <div className="flex gap-4">
+          <input
+            name="value"
+            type="text"
+            placeholder="Enter amount reps"
+            className="input input-bordered grow shrink-0"
+            value={formData.value}
+            onChange={(e) => handleChange(e, "value")}
+          />
+
+          <select
+            className="select select-bordered grow shrink-0"
+            name="exerciseName"
+            value={formData.exerciseName}
+            onChange={(e) => handleChange(e, "exerciseName")}
+          >
+            <option disabled selected>
+              Select exercise name
+            </option>
+            {exerciseArr?.map((item, i) => {
+              return (
+                <option key={i} value={item.value}>
+                  {item.name}
+                </option>
+              );
+            })}
+          </select>
+
+          <button
+            type="submit"
+            aria-label="create rep"
+            name="_action"
+            value={"createRep"}
+            className="btn btn-primary"
+          >
+            Send
+          </button>
+        </div>
+      </Form>
+
+      {/* <div className="flex-grow flex-shrink">
+        <div className="stats shadow">
+          <div className="stat place-items-center">
+            <div className="stat-title">Downloads</div>
+            <div className="stat-value">31K</div>
+            <div className="stat-desc">From January 1st to February 1st</div>
+          </div>
+
+          <div className="stat place-items-center">
+            <div className="stat-title">Users</div>
+            <div className="stat-value text-secondary">4,200</div>
+            <div className="stat-desc text-secondary">↗︎ 40 (2%)</div>
+          </div>
+
+          <div className="stat place-items-center">
+            <div className="stat-title">New Registers</div>
+            <div className="stat-value">1,200</div>
+            <div className="stat-desc">↘︎ 90 (14%)</div>
+          </div>
+        </div>
+      </div> */}
+    </div>
   );
 };

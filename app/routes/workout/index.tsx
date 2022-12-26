@@ -18,8 +18,6 @@ export default function Training() {
 
   return (
     <>
-      <h1 className="uppercase text-xl text-emerald-800">Training</h1>
-
       <ExerciseList />
       {!training?.id && <CreateTraining />}
       {training?.id && <TrainingForm />}
