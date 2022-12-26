@@ -7,6 +7,9 @@ type tExerciseListProps = {
 
 export const ExerciseList: FC<tExerciseListProps> = () => {
   const { exercises } = useLoaderData();
+
+  // console.log("exercises", exercises);
+
   return (
     <ul className="flex gap-2">
       {exercises?.map((item: any) => {
