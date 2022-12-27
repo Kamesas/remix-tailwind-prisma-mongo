@@ -18,7 +18,6 @@ export default function Training() {
 
   return (
     <>
-      <h2>list exerc</h2>
       <ExerciseList />
       {!training?.id && <CreateTraining />}
       {training?.id && <TrainingForm />}
