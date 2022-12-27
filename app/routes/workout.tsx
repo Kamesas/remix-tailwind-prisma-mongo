@@ -3,13 +3,13 @@ import { json } from "@remix-run/node";
 import { createRepAction } from "~/actions/workout";
 import { WorkoutLayout } from "~/components/layouts/WorkoutLayout";
 import { requireUserId } from "~/utils/auth.server";
-import { createTraining, deleteRep, getTrainingByUserIdAndDate} from "~/utils/training.server"; // prettier-ignore
+import { createTraining, deleteRep, getTodaysTraining} from "~/utils/training.server"; // prettier-ignore
 
 export type actionsName = "createRep" | "deleteRep" | "createTraining";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
-  const training = await getTrainingByUserIdAndDate(userId, "25");
+  const training = await getTodaysTraining(userId);
   return json({ training, userId });
 };
 

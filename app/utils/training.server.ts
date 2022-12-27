@@ -1,3 +1,4 @@
+import { dateFormat } from "~/helpers/dates";
 import { prisma } from "./prisma.server";
 
 export const createTraining = async ({ userId }: { userId: string }) => {
@@ -26,10 +27,12 @@ export const createTrainingRep = async ({
   });
 };
 
-export const getTrainingByUserIdAndDate = async (
-  userId: string,
-  date: string
-) => {
+export const getTodaysTraining = async (userId: string) => {
+  const { allFormats } = dateFormat({
+    initDate: new Date(),
+    format: "currDay",
+  });
+
   return await prisma.training.findFirst({
     where: {
       userId,
@@ -37,8 +40,8 @@ export const getTrainingByUserIdAndDate = async (
       //   equals: "push ups",
       // },
       createdAt: {
-        gte: new Date("2022-12-26"),
-        lt: new Date("2022-12-27"),
+        gte: new Date(allFormats?.currDay),
+        lt: new Date(allFormats?.nextDay),
       },
     },
     include: {

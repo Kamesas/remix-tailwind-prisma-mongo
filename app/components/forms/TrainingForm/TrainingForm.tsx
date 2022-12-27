@@ -15,8 +15,6 @@ export const TrainingForm = () => {
     exerciseName: "",
   });
 
-  console.log("formData", formData, actionData?.error);
-
   useEffect(() => {
     setFormData((prev) => {
       return {
