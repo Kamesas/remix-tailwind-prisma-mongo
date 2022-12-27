@@ -1,6 +1,6 @@
+import type { FC } from "react";
 import type { Rep, Training } from "@prisma/client";
 import { Form, useLoaderData } from "@remix-run/react";
-import type { FC } from "react";
 import { Fragment } from "react";
 
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";

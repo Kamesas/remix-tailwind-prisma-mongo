@@ -45,7 +45,7 @@ export const TrainingForm = () => {
       >
         <input type={"hidden"} value={training?.id} name="id" />
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap">
           <input
             name="value"
             type="text"
