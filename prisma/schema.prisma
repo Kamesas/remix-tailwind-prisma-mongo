@@ -87,4 +87,5 @@ model Rep {
   trainingId  String     @db.ObjectId
   name        String
   value       String
+  createdAt   DateTime?   @default(now())
 }

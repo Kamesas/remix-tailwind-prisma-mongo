@@ -5,6 +5,7 @@ import { Fragment } from "react";
 
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import type { tExercises } from "~/CONSTANTS/workout";
+import { dateFormat } from "~/helpers/dates";
 
 type tExerciseListProps = {
   [key: string]: any;
@@ -29,6 +30,7 @@ export const ExerciseList: FC<tExerciseListProps> = () => {
     return exercises;
   };
 
+  console.log("training -> ", training);
   if (!training?.set?.length) return <h2>no reps yet</h2>;
   return (
     <>
@@ -47,7 +49,23 @@ export const ExerciseList: FC<tExerciseListProps> = () => {
               </div>
 
               <div className="flex gap-2 flex-wrap">
-                {reps?.map((item) => {
+                {reps?.map((item, i) => {
+                  const time = item?.createdAt
+                    ? dateFormat({ initDate: item.createdAt, format: "time" })
+                        ?.date
+                    : "";
+
+                  const prevRep = reps[i - 1]?.createdAt;
+                  const timeAgo =
+                    item?.createdAt && i !== 0 && prevRep
+                      ? dateFormat({
+                          initDate: item.createdAt,
+                          endDate: prevRep,
+                          format: "timeAgo",
+                        })?.date
+                      : "";
+
+                  console.log("timeAgo", timeAgo);
                   return (
                     <div key={item?.id} className="stats shadow">
                       <div className="stat">
@@ -65,11 +83,16 @@ export const ExerciseList: FC<tExerciseListProps> = () => {
                           </Form>
                         </div>
 
-                        {/* <div className="stat-title">{item?.name}</div> */}
+                        {/* <div className="stat-title">
+                          {timeAgo && timeAgo + "ago"}
+                        </div> */}
                         <div className={`stat-value text-accent`}>
                           {item?.value}
                         </div>
-                        <div className="stat-desc">{"item?.time"}</div>
+                        <div className="stat-desc">{time}</div>
+                        <div className="stat-desc">
+                          {timeAgo && timeAgo + " ago"}
+                        </div>
                       </div>
                     </div>
                   );
