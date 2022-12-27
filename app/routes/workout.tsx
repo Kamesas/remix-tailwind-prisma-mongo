@@ -1,5 +1,6 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import { Outlet } from "@remix-run/react";
 import { createRepAction } from "~/actions/workout";
 import { WorkoutLayout } from "~/components/layouts/WorkoutLayout";
 import { requireUserId } from "~/utils/auth.server";
@@ -34,7 +35,14 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 const Workout = () => {
-  return <WorkoutLayout />;
+  return (
+    <div className="work">
+      <h1>work test</h1>
+
+      <Outlet />
+    </div>
+  );
+  // return <WorkoutLayout />;
 };
 
 export default Workout;
