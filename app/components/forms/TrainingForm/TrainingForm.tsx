@@ -1,9 +1,20 @@
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import { SelectBox } from "~/components/select-box";
-import { InputField } from "../InputField/InputField";
 import { exerciseArr } from "~/CONSTANTS/workout";
 import type { Rep, Training } from "@prisma/client";
+import { RemixReactSelect } from "~/components/formsElement/Select/RemixReactSelect";
+
+const getDeepValue = <
+  Obj,
+  FirstKey extends keyof Obj,
+  SecondKey extends keyof Obj[FirstKey]
+>(
+  tooltips2: Obj,
+  firstKey: FirstKey,
+  secondKey: SecondKey
+): Obj[FirstKey][SecondKey] => {
+  return tooltips2[firstKey][secondKey];
+};
 
 export const TrainingForm = () => {
   const actionData = useActionData();
@@ -24,14 +35,14 @@ export const TrainingForm = () => {
     });
   }, [training?.set?.length]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    field: string
-  ) => {
-    console.log("e", e.target?.value);
-
-    setFormData((data) => ({ ...data, [field]: e.target.value }));
+  const handleChange = (value: string, field: string) => {
+    setFormData((data) => ({ ...data, [field]: value }));
   };
+
+  const opt = exerciseArr?.map((item) => ({
+    name: item?.value,
+    label: item?.name,
+  }));
 
   if (!training?.id) return null;
   return (
@@ -50,26 +61,16 @@ export const TrainingForm = () => {
             placeholder="Enter amount reps"
             className="input input-bordered grow shrink-0"
             value={formData.value}
-            onChange={(e) => handleChange(e, "value")}
+            onChange={(e) => handleChange(e?.target?.value, "value")}
           />
 
-          <select
-            className="select select-bordered grow shrink-0"
+          <RemixReactSelect
+            options={opt}
             name="exerciseName"
-            value={formData.exerciseName}
-            onChange={(e) => handleChange(e, "exerciseName")}
-          >
-            <option disabled selected>
-              Select exercise name
-            </option>
-            {exerciseArr?.map((item, i) => {
-              return (
-                <option key={i} value={item.value}>
-                  {item.name}
-                </option>
-              );
-            })}
-          </select>
+            defaultValue={opt[0]}
+            customValue={formData.exerciseName}
+            onChange={(e) => e?.name && handleChange(e.name, "exerciseName")}
+          />
 
           <button
             type="submit"

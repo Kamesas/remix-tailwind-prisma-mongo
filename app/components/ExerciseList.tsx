@@ -30,7 +30,6 @@ export const ExerciseList: FC<tExerciseListProps> = () => {
     return exercises;
   };
 
-  console.log("training -> ", training);
   if (!training?.set?.length) return <h2>no reps yet</h2>;
   return (
     <>
@@ -65,7 +64,6 @@ export const ExerciseList: FC<tExerciseListProps> = () => {
                         })?.date
                       : "";
 
-                  console.log("timeAgo", timeAgo);
                   return (
                     <div key={item?.id} className="stats shadow">
                       <div className="stat">
